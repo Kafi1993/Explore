@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "# ui.R\n\nshinyUI(fluidPage(\n  \n  titlePanel(h1(strong(\"Data ExploreR\"))),\n  \n  sidebarLayout(position = \"left\",\n    sidebarPanel(\n    \n      helpText(\"Load in your dataset and specify its properties.\"),\n      \n      fileInput(\"dataframe\", \"Choose File\"),\n      \n      br(),\n      \n      selectInput(\"sep\", \"Choose a data seperator:\",\n                  choices = c(\"Tab\", \"Comma\", \"Semicolon\")),\n      \n      selectInput(\"dec\", \"Choose a decimal seperator:\",\n                  choices = c(\"Comma\", \"Dot\"))\n      \n    ),\n\n    mainPanel(\"Main Panel\")\n    \n  )\n))\n\n\n",
+    "created" : 1497709726135.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "336883736",
+    "id" : "69C4F726",
+    "lastKnownWriteTime" : 1497712364,
+    "last_content_update" : 1497712364234,
+    "path" : "C:/Users/Flösch/Repositories/Explore/inst/ui.R",
+    "project_path" : "inst/ui.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

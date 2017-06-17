@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "#' Stacked Barcharts\n#' \n#' Draw a stacked barchart for a general overview of items from a dataset.\n#' \n#'@author Joschka Cremers\n#'@param dataframe The (typically psychological) dataframe to be analyized.\n#' \n#'@return Plots a stacked barchart with items a the y-axis and relative frequencies on x-axis.\n#' \n#'@example\n#' data(\"big5_e\")\n#' stackedBars(\"big5_e\")\n\nlibrary(ggplot2)\n\n###changes structure of the dataframe to make it usable for ggplot\n#'@export\nconvertData <- function(rawdata){\n  stacked_data <- stack(rawdata)\n  # converts columns to factors, so that it can be used by ggplot as a categorical variable\n  as.data.frame(sapply(stacked_data, as.factor))\n}\n\n# Plot-function\n#'@export\nstackedBars <- function(dataframe){\n  dataframe <- convertData(dataframe)\n  # ind codes for the items - shown on x-axis\n  # values contains the responses of participants/values of the items\n  ggplot(data = dataframe, mapping = aes(x = ind, fill = values)) +\n    geom_bar(position = \"fill\") + #oder dodge\n    coord_flip()\n}\n\n",
+    "created" : 1497709616153.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4093433294",
+    "id" : "F898B0D6",
+    "lastKnownWriteTime" : 1497709560,
+    "last_content_update" : 1497709560,
+    "path" : "C:/Users/Flösch/Repositories/Explore/R/stackedBarCharts.R",
+    "project_path" : "R/stackedBarCharts.R",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

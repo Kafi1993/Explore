@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "# server.R\n\nshinyServer(\n  function(input, output){\n    \n  }\n)",
+    "created" : 1497709699925.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3951149283",
+    "id" : "701AC90E",
+    "lastKnownWriteTime" : 1497710478,
+    "last_content_update" : 1497710478791,
+    "path" : "C:/Users/Flösch/Repositories/Explore/inst/server.R",
+    "project_path" : "inst/server.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
