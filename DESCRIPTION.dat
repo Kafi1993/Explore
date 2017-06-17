@@ -1,0 +1,15 @@
+Package: Explore
+Type: Package
+Version: 0.1
+Title: Explore
+Description: Explore your dataset.
+Author: "Karl-Philipp Floesch, Leonie Kotz, Joschka Cremers"
+Depends:
+  R (>= 3.3.3),
+Suggests: knitr, rmarkdown
+VignetteBuilder: knitr    
+Date: 2017-06-17
+License: GPL-2
+LazyData: true
+Maintainer: 'Matthias Bannert' <bannert@kof.ethz.ch>
+RoxygenNote: 6.0.1
