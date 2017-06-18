@@ -22,26 +22,11 @@ getDescriptives <- function(rawdata){
   li$mean <- meanAll(numericData)
   li$median <- medianAll(numericData)
   li$sd <- sdAll(numericData)
+  li$min <- minAll(numericData)
+  li$max <- maxAll(numericData)
+  li$kurtosis <- kurtosisAll(numericData)
+  li$skew <- skewAll(numericData)
   
   return(li)
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

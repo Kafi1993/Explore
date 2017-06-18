@@ -5,9 +5,8 @@ Title: Explore
 Description: Explore your dataset.
 Author: "Karl-Philipp Floesch, Leonie Kotz, Joschka Cremers"
 Depends:
-  R (>= 3.3.3),
-Suggests: knitr, rmarkdown
-VignetteBuilder: knitr    
+  R (>= 3.3.3), ggplot2 (>= 2.2.1), psych (>= 1.7.3)
+Suggests:
 Date: 2017-06-17
 License: GPL-2
 LazyData: true
