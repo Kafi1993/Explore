@@ -8,7 +8,7 @@ source("helpers.R")
 
 shinyServer(function(input, output) {
   
-  # Read in datafile
+  # Read in datafile ----------------
   
     data <- reactive({
       
@@ -20,7 +20,7 @@ shinyServer(function(input, output) {
     })
   
   
-  # Showing data
+  # Showing data ----------------------
       
   output$datatable <- renderDataTable({
     
@@ -34,7 +34,7 @@ shinyServer(function(input, output) {
     })
     
   
-  # Descriptives Table   
+  # Descriptives Table --------------------  
   
   output$summary <- renderDataTable({
 
@@ -51,9 +51,11 @@ shinyServer(function(input, output) {
   })
   
   
-  # Dynamic Column Range Panel
+  # Graphics All Items ---------------------
   
-  output$moreControls_G1 <- renderUI({
+  ### Dynamic Column Range Panel 
+  
+  output$RangeColSelect <- renderUI({
     
     validate(
       need(input$inFile != "", "Please load a data set")
@@ -67,7 +69,7 @@ shinyServer(function(input, output) {
   })
   
   
-  # Subset data with selected Columns
+  ### Subset data with selected Columns
 
   dataForGraph <- reactive({
 
@@ -80,8 +82,7 @@ shinyServer(function(input, output) {
   })
 
     
-  
-  #Graphics
+  ### Outout
     
   output$graphics <- renderPlot({
 
@@ -96,5 +97,43 @@ shinyServer(function(input, output) {
       
       
     })
+  
+  # Graphics Single Item ---------------------
+  
+  ### Dynamic Column Range Panel 1 
+  
+  output$ItemSelect1 <- renderUI({
+    
+    validate(
+      need(input$inFile != "", "Please load a data set")
+    ) 
+    
+    selectInput("SingVar", "Choose a variable to display", choices = colnames(data()))
+   
+  })
+  
+  
+  ### Dynamic Column Range Panel 2
+  
+  output$ItemSelect2 <- renderUI({
+    
+    validate(
+      need(input$inFile != "", "Please load a data set")
+    ) 
+    
+    selectInput("SingVar", "Choose a variable to display", choices = colnames(data()))
+    
+  })
+  
+  
   }
 )  
+
+
+
+
+
+
+
+
+
