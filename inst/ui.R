@@ -74,13 +74,13 @@ shinyUI(navbarPage(strong("Data ExploreR"),
     tabPanel("Single Item",
              h2("ExploreR Graphics"),
              br(),
-             column(3,
+             column(4,
                     h4(strong("Select Item 1")),
                     br(),
                     uiOutput('ItemSelect1')),
                     
-                    
-            column(4,
+                   
+            column(4, offset = 1,
                    h4(strong("Select Item 2")),
                    br(),
                    uiOutput('ItemSelect2'))      
