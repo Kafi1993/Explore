@@ -2,30 +2,30 @@
 % Please edit documentation in R/getDescriptives.R
 \name{getDescriptives}
 \alias{getDescriptives}
-\title{Explore 
- 
-Kurzbeschreibung
- 
-ausführlichere Beschreibung}
+\title{Explore}
 \usage{
-getDescriptives(rawdata)
+getDescriptives(rawdata, output = "dataframe")
 }
 \arguments{
-\item{rawdata}{data.frame input, typically a psychological dataset.}
+\item{rawdata}{data frame input, typically a psychological dataset.}
+
+\item{output}{Should the output be a dataframe or a list? ("dataframe", "list", default is dataframe)}
 }
 \value{
-list
+A dataframe or list (with all the following outputs: number of NA, mean, median, standard deviation, minimum, maximum, kurtosis and skew)
 }
 \description{
-Explore 
- 
-Kurzbeschreibung
- 
-ausführlichere Beschreibung
+Returns all the relevant statistical basics (number of NA, mean, median, standard deviation, minimum, maximum, kurtosis and skew) to get a quick overview of your data.
 }
 \examples{
+# Load the big5-dataset from the Explore package
+data("big5")
+# if you want to get the results as a dataframe
+getDescriptives(big5, "dataframe")
+# or if you want to get them as a list
+getDescriptives(big5, "list")
 
 }
 \author{
-Karl-Philipp Flösch, Joschka Cremers, Leonie Kotz
+Leonie Kotz
 }
