@@ -1,24 +1,26 @@
 #' Explore 
-#'  
+#'
 #' Returns all the relevant statistical basics (number of NA, mean, median, standard deviation, minimum, maximum, kurtosis and skew) to get a quick overview of your data.
 #'
 #'  
 #' 
-#' @author Karl-Philipp Floesch, Joschka Cremers, Leonie Kotz
+#' @author Leonie Kotz
 #' 
 #'
 #' @param rawdata data frame input, typically a psychological dataset.
-#' @param output Should the output be a list or a dataframe? ("list", "dataframe", default is list)
+#' @param output Should the output be a dataframe or a list? ("dataframe", "list", default is dataframe)
 #' 
 #' 
-#' @examples data("mtcars")
-#' getDescriptives(mtcars, "list")
-#' or
-#' getDescriptives(mtcars, "dataframe")
+#' @examples # Load the big5-dataset from the Explore package
+#' data("big5")
+#' # if you want to get the results as a dataframe
+#' getDescriptives(big5, "dataframe")
+#' # or if you want to get them as a list
+#' getDescriptives(big5, "list")
 #' 
-#' @return A list or dataframe (with all the following outputs: number of NA, mean, median, standard deviation, minimum, maximum, kurtosis and skew)
+#' @return A dataframe or list (with all the following outputs: number of NA, mean, median, standard deviation, minimum, maximum, kurtosis and skew)
 #' @export 
-getDescriptives <- function(rawdata, output = "list"){
+getDescriptives <- function(rawdata, output = "dataframe"){
   numericData <- extractNumeric(rawdata)
   
   li <- list()
@@ -32,11 +34,11 @@ getDescriptives <- function(rawdata, output = "list"){
   li$skew <- skewAll(numericData)
   li$na <- naCount(numericData)
   
-  if (output == "list") dataOut <- li
+  if (output == "dataframe") dataOut <- data.frame(li[1:length(li)])
   
-  else if(output == "dataframe"){
+  else if(output == "list"){
     
-   dataOut <-  data.frame(li[1:length(li)])
+   dataOut <-  li
   }
   
   return(dataOut)
