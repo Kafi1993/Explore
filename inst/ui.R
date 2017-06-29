@@ -54,32 +54,38 @@ shinyUI(navbarPage(strong("Data ExploreR"),
   ),
   navbarMenu("Graphics",
     tabPanel("All Items",
+        fluidPage(
            h2("ExploreR Graphics"),
            br(),
            fluidRow(
              column(3,
                     h4(strong("Subset data")),
                     br(),
-                    uiOutput('moreControls_G1')
-                    
-             )
+                    uiOutput('RangeColSelect'))
              
            ),
            
            hr(),
-           mainPanel(plotOutput('graphics'))
-           
-      ),
+           plotOutput('graphics')
+        
+        )
+    ),
     
-    tabPanel("Single Items",
+    tabPanel("Single Item",
              h2("ExploreR Graphics"),
              br(),
-             column(3,
-                    h4(strong("Select Item")),
+             column(4,
+                    h4(strong("Select Item 1")),
                     br(),
-                    uiOutput('moreControls_G2')
+                    uiOutput('ItemSelect1')),
                     
-             )
+                   
+            column(4, offset = 1,
+                   h4(strong("Select Item 2")),
+                   br(),
+                   uiOutput('ItemSelect2'))      
+            
+             
       
     )
     )

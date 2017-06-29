@@ -4,3 +4,5 @@
 .Ruserdata
 private/
 .DS_Store
+.Rbuildignore
+Explore.Rproj

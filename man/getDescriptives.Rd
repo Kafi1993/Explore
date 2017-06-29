@@ -2,22 +2,36 @@
 % Please edit documentation in R/getDescriptives.R
 \name{getDescriptives}
 \alias{getDescriptives}
+<<<<<<< HEAD
 \title{Get Descriptives}
 \usage{
 getDescriptives(rawdata, output = "dataframe")
+=======
+\title{Explore}
+\usage{
+getDescriptives(rawdata, output = "list")
+>>>>>>> bafa8349a523c3da60a20d01cbc15091a5d23849
 }
 \arguments{
 \item{rawdata}{data frame input, typically a psychological dataset.}
 
+<<<<<<< HEAD
 \item{output}{Should the output be a dataframe or a list? ("dataframe", "list", default is dataframe)}
 }
 \value{
 A dataframe or list (with all the following outputs: number of NA, mean, median, standard deviation, minimum, maximum, kurtosis and skew)
+=======
+\item{output}{Should the output be a list or a dataframe? ("list", "dataframe", default is list)}
+}
+\value{
+A list or dataframe (with all the following outputs: number of NA, mean, median, standard deviation, minimum, maximum, kurtosis and skew)
+>>>>>>> bafa8349a523c3da60a20d01cbc15091a5d23849
 }
 \description{
 Returns all the relevant statistical basics (number of NA, mean, median, standard deviation, minimum, maximum, kurtosis and skew) to get a quick overview of your data.
 }
 \examples{
+<<<<<<< HEAD
 # Load the big5-dataset from the Explore package
 data("big5")
 # if you want to get the results as a dataframe
@@ -28,4 +42,14 @@ getDescriptives(big5, "list")
 }
 \author{
 Leonie Kotz
+=======
+data("mtcars")
+getDescriptives(mtcars, "list")
+or
+getDescriptives(mtcars, "dataframe")
+
+}
+\author{
+Karl-Philipp Floesch, Joschka Cremers, Leonie Kotz
+>>>>>>> bafa8349a523c3da60a20d01cbc15091a5d23849
 }

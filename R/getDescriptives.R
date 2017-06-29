@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 #' Get Descriptives
+=======
+#' Explore
+>>>>>>> bafa8349a523c3da60a20d01cbc15091a5d23849
 #'
 #' Returns all the relevant statistical basics (number of NA, mean, median, standard deviation, minimum, maximum, kurtosis and skew) to get a quick overview of your data.
 #'

@@ -2,7 +2,7 @@ Package: Explore
 Type: Package
 Version: 0.1
 Title: Explore
-Description: Explore your dataset.
+Description: Easy first exploration of a dataset, computing several descriptive statistics and plotting barcharts for a simple overview in only a few function calls.
 Author: "Karl-Philipp Floesch, Leonie Kotz, Joschka Cremers"
 Depends:
   R (>= 3.3.3), ggplot2 (>= 2.2.1), psych (>= 1.7.3)
@@ -10,5 +10,5 @@ Suggests:
 Date: 2017-06-17
 License: GPL-2
 LazyData: true
-Maintainer: 'Matthias Bannert' <bannert@kof.ethz.ch>
+Maintainer: 'Karl-Philipp Floesch' <karl-philipp.floesch@uni-konstanz.de>
 RoxygenNote: 6.0.1
