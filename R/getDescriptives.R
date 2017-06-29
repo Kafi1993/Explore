@@ -1,5 +1,5 @@
-#' Explore 
-#'  
+#' Explore
+#'
 #' Returns all the relevant statistical basics (number of NA, mean, median, standard deviation, minimum, maximum, kurtosis and skew) to get a quick overview of your data.
 #'
 #'  
