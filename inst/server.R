@@ -1,142 +1,99 @@
 # server.R
 
+library(shiny)
 library(ggplot2)
 library(psych)
-
-# Hilfs-FUnktionen
-
-extractNumeric <- function(dframe){
-  dframe[sapply(dframe, is.numeric)] 
-}
-
-
-
-naCount <- function(dframe){
-  sapply(dframe, function(column){sum(is.na(column))})
-}
-
-
-
-meanAll <- function(dframe){
-  round(sapply(dframe, mean, na.rm = T), digits = 2)
-}
-
-
-
-medianAll <- function(dframe){
-  round(sapply(dframe, median, na.rm = T), digits = 2)
-} 
-
-
-
-sdAll <- function(dframe){
-  round(sapply(dframe, sd, na.rm = T), digits = 2)
-}
-
-
-minAll <- function(dframe){
-  round(sapply(dframe, min, na.rm = T), digits = 2)
-}
-
-
-maxAll <- function(dframe){
-  round(sapply(dframe, max, na.rm = T), digits = 2)
-}
-
-
-skewAll <- function(dframe){
-  round(sapply(dframe, skew, na.rm = T), digits = 2)
-}
-
-
-kurtosisAll <- function(dframe){
-  round(sapply(dframe, kurtosi, na.rm = T), digits = 2)
-}
-
-# Hauptfuntktion
-getDescriptives <- function(rawdata){
-  numericData <- extractNumeric(rawdata)
-  
-  li <- list()
-  
-  li$na <- naCount(numericData)
-  li$mean <- meanAll(numericData)
-  li$median <- medianAll(numericData)
-  li$sd <- sdAll(numericData)
-  li$min <- minAll(numericData)
-  li$max <- maxAll(numericData)
-  li$kurtosis <- kurtosisAll(numericData)
-  li$skew <- skewAll(numericData)
-  
-  return(li)
-}
-
-
-###changes structure of the dataframe to make it usable for ggplot
-
-convertData <- function(rawdata){
-  stacked_data <- stack(rawdata)
-  # converts columns to factors, so that it can be used by ggplot as a categorical variable
-  as.data.frame(sapply(stacked_data, as.factor))
-}
-
-# Plot-function
-
-stackedBars <- function(dataframe){
-  dataframe <- convertData(dataframe)
-  # ind codes for the items - shown on x-axis
-  # values contains the responses of participants/values of the items
-  ggplot(data = dataframe, mapping = aes(x = ind, fill = values)) +
-    geom_bar(position = "fill") + #oder dodge
-    coord_flip()
-}
-
+source("helpers.R")
 
 
 shinyServer(function(input, output) {
-    output$datatable <- renderDataTable({
-     
-      inFile <- input$inFile
+  
+  # Read in datafile
+  
+    data <- reactive({
       
-      if (is.null(inFile))
-        return(NULL)
-
-      read.csv(inFile$datapath, header = input$head, sep = input$sep, 
+      inFile <- input$inFile 
+      
+      read.csv(inFile$datapath, header = input$head, sep = input$sep, stringsAsFactors = input$sASf,
                quote = input$quote, dec = input$dec, na.strings = input$miss)
       
     })
+  
+  
+  # Showing data
+      
+  output$datatable <- renderDataTable({
+    
+    validate(
+      need(input$inFile != "", "Please load a data set")
+    ) 
     
     
-    output$summary <- renderDataTable({
-
-      inFile <- input$inFile
-
-      if (is.null(inFile))
-        return(NULL)
-
-      dataset <-  read.csv(inFile$datapath, header = input$head, sep = input$sep,
-                          quote = input$quote, dec = input$dec, na.strings = input$miss)
-
-      list <- getDescriptives(dataset)
-
-      df <- data.frame("Item" = names(list$mean),"Mean" = list$mean, "SD" = list$sd,"Median" = list$median, "Min" = list$min,
-                 "Max" = list$max, "Skew" = list$skew, "Kurtosis" = list$kurtosis ,"Missings" = list$na)
-
+    data()
+      
     })
     
-    output$graphics <- renderPlot({
+  
+  # Descriptives Table   
+  
+  output$summary <- renderDataTable({
+
+    validate(
+      need(input$inFile != "", "Please load a data set")
+    ) 
+    
+
+    list <- getDescriptives(data())
+
+    df <- data.frame("Item" = names(list$mean),"Mean" = list$mean, "SD" = list$sd,"Median" = list$median, "Min" = list$min,
+               "Max" = list$max, "Skew" = list$skew, "Kurtosis" = list$kurtosis ,"Missings" = list$na)
+
+  })
+  
+  
+  # Dynamic Column Range Panel
+  
+  output$moreControls_G1 <- renderUI({
+    
+    validate(
+      need(input$inFile != "", "Please load a data set")
+    ) 
+    
+    numData <- extractNumeric(data())  
+    
+    sliderInput("ColRange", "Range of columns", min = 1, max = ncol(numData), 
+                value = c(1, ncol(numData)), step = 1)
+    
+  })
+  
+  
+  # Subset data with selected Columns
+
+  dataForGraph <- reactive({
+
+    minC <- input$ColRange[1]
+    maxC <- input$ColRange[2]
+
+    data()[minC:maxC]
+
+
+  })
+
+    
+  
+  #Graphics
+    
+  output$graphics <- renderPlot({
+
+    if (is.null(input$inFile))
+      return(NULL)
+    
+    validate(
+      need(input$ColRange, "Please wait a moment")
+    )
+    
+    stackedBars(dataForGraph())
       
-      inFile <- input$inFile
-      
-      if (is.null(inFile))
-        return(NULL)
-      
-      dataset <-  read.csv(inFile$datapath, header = input$head, sep = input$sep,
-                           quote = input$quote, dec = input$dec, na.strings = input$miss)
-      
-      # Plot-function
-      
-      stackedBars(dataset)
       
     })
   }

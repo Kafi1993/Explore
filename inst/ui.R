@@ -14,6 +14,8 @@ shinyUI(navbarPage(strong("Data ExploreR"),
         
         checkboxInput("head", strong("Header"), TRUE),
         
+        checkboxInput("sASf", strong("Strings as Factors"), FALSE),
+        
         selectInput("sep", "Data seperator",
                     choices = c(Tab = '\t', Comma = ',', Semicolon = ';'),
                     selected = ';'),
@@ -50,26 +52,36 @@ shinyUI(navbarPage(strong("Data ExploreR"),
     
     )
   ),
-  tabPanel("Graphics",
+  navbarMenu("Graphics",
+    tabPanel("All Items",
            h2("ExploreR Graphics"),
            br(),
            fluidRow(
              column(3,
                     h4(strong("Subset data")),
                     br(),
-                    sliderInput("ColRange", "Range of columns", 
-                                min = 1, max = 20, value = c(1, 20))
-             ),
-             
-             column(4,
-                    h4(strong("Test")))
+                    uiOutput('moreControls_G1')
+                    
+             )
              
            ),
            
            hr(),
            mainPanel(plotOutput('graphics'))
            
-           
+      ),
+    
+    tabPanel("Single Items",
+             h2("ExploreR Graphics"),
+             br(),
+             column(3,
+                    h4(strong("Select Item")),
+                    br(),
+                    uiOutput('moreControls_G2')
+                    
+             )
+      
+    )
     )
   )
 )
