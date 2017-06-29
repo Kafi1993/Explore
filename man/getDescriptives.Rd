@@ -2,7 +2,7 @@
 % Please edit documentation in R/getDescriptives.R
 \name{getDescriptives}
 \alias{getDescriptives}
-\title{Explore}
+\title{Get Descriptives}
 \usage{
 getDescriptives(rawdata, output = "dataframe")
 }
