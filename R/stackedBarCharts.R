@@ -7,7 +7,7 @@
 #'@param type Choose between relative (type = "position_fill") and absolute (type = "position_stack") frequencies.
 #'@param pattern optional, selects those items which match the specified pattern. May also be column-index-values.
 #'@param n.col specify the maximum number of columns to be drawn.
-#'@param palette specify a color-palette from RColorBrewer. Advised to use bidirectional (e.g. "RdBu") and categorical (e.g. "Set3") color-schemes if apropriate.
+#'@param palette specify a color-palette from RColorBrewer. Advised to use bidirectional (e.g. "RdBu") and categorical (e.g. "Set3") color-schemes if appropriate.
 #'@param direction set to -1 to reverse the color-scheme.
 #'
 #'@usage stackedBars(type = position_fill, n.col = 15, palette = "Blues", direction = 1)
@@ -15,10 +15,10 @@
 #'@return Plots a stacked barchart with a maximum of 15 items at the y-axis and relative or absolute frequencies on x-axis.
 #' 
 #'@examples
-#' #Load big5-data from Explore-package
+#' # Load big5-data from Explore-package
 #' data("big5")
 #' 
-#' #Draw only Extraversion-items in graph
+#' # Draw only Extraversion-items in graph
 #' stackedBars(big5, pattern = "^E", palette = "YlGn")
 #'
 #'@export
