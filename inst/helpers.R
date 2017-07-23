@@ -76,15 +76,55 @@ convertData <- function(rawdata){
   as.data.frame(sapply(stacked_data, as.factor))
 }
 
+
+divideByPattern <- function(dframe, pattern, n.col = 15){
+  if(is.character(pattern) == TRUE){
+    dframe <- dframe[,grep(pattern, names(dframe), value=T)]
+  }
+  else if(is.numeric(pattern) == TRUE){
+    dframe <- dframe[,pattern]
+  }
+  else{
+    stop('"pattern" must only contain character values or vectorial index-values.')
+  }
+  
+  dframe <- extractNumeric(dframe)
+  if(NCOL(dframe)>n.col){
+    dframe <- dframe[,1:n.col]
+  }
+  return(dframe)
+}
+
+
 # Plot-function
 
-stackedBars <- function(dataframe){
-  numericData <- extractNumeric(dataframe)
-  conv_numericData <- convertData(numericData)
+stackedBars <- function(dframe, type = position_fill, pattern = "", n.col = 15, palette = "Blues", direction = 1){
+  
+  dframe <- divideByPattern(dframe = dframe, pattern = pattern, n.col = n.col)
+  dframe <- convertData(dframe)
   
   # ind codes for the items - shown on x-axis
   # values contains the responses of participants/values of the items
-  ggplot(data = conv_numericData, mapping = aes(x = ind, fill = values)) +
-    geom_bar(position = "fill") + #oder dodge
-    coord_flip()
+  # see function "convertData" for details
+  ggplot(data = dframe, mapping = aes(x = ind, fill = values)) +
+    geom_bar(position = type(reverse = TRUE)) +
+    coord_flip() +
+    labs(x = " ") +
+    scale_fill_brewer(palette = palette, direction = direction)
 }
+
+
+parallelBars <- function(dframe, position = position_fill(), pattern = "", n.col = 15, palette = "Blues", direction = 1){
+  
+  dframe <- divideByPattern(dframe = dframe, pattern = pattern, n.col = n.col)
+  dframe <- convertData(dframe)
+  
+  # ind codes for the items - shown on x-axis
+  # values contains the responses of participants/values of the items
+  ggplot(data = dframe, mapping = aes(x = ind, fill = values)) +
+    geom_bar(position = position) +
+    labs(x = " ") +
+    scale_fill_brewer(palette = palette, direction = direction) +
+    guides(fill = guide_legend(reverse = T))
+}
+
